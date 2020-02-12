@@ -17,12 +17,16 @@ package com.google.android.exoplayer2.metadata.icy;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.metadata.Metadata;
 import com.google.android.exoplayer2.metadata.MetadataDecoder;
 import com.google.android.exoplayer2.metadata.MetadataInputBuffer;
 import com.google.android.exoplayer2.util.Assertions;
 import com.google.android.exoplayer2.util.Util;
 import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,17 +37,34 @@ public final class IcyDecoder implements MetadataDecoder {
   private static final String STREAM_KEY_NAME = "streamtitle";
   private static final String STREAM_KEY_URL = "streamurl";
 
+  private final CharsetDecoder utf8Decoder;
+  private final CharsetDecoder cp1251Decoder;
+  private final CharsetDecoder iso88591Decoder;
+
+
+  public IcyDecoder() {
+    utf8Decoder = Charset.forName(C.UTF8_NAME).newDecoder();
+    cp1251Decoder = Charset.forName(C.CP_1251_NAME).newDecoder();
+    iso88591Decoder = Charset.forName(C.ISO88591_NAME).newDecoder();
+  }
+
   @Override
   @SuppressWarnings("ByteBufferBackingArray")
   public Metadata decode(MetadataInputBuffer inputBuffer) {
     ByteBuffer buffer = Assertions.checkNotNull(inputBuffer.data);
-    byte[] data = buffer.array();
+    @Nullable String icyString = decodeToString(buffer);
     int length = buffer.limit();
-    return decode(Util.fromUtf8Bytes(data, 0, length));
+    byte[] icyBytes = new byte[length];
+    buffer.get(icyBytes);
+
+    if (icyString == null) {
+      return new Metadata(new IcyInfo(icyBytes.toString(), /* title= */ null, /* url= */ null));
+    }
+    return decode(icyString);
   }
 
   @VisibleForTesting
-  /* package */ Metadata decode(String metadata) {
+    /* package */ Metadata decode(String metadata) {
     @Nullable String name = null;
     @Nullable String url = null;
     int index = 0;
@@ -62,5 +83,36 @@ public final class IcyDecoder implements MetadataDecoder {
       index = matcher.end();
     }
     return new Metadata(new IcyInfo(metadata, name, url));
+  }
+
+  // The ICY spec doesn't specify a character encoding, and there's no way to communicate one
+  // either. So try decoding UTF-8 first, then fall back to CP-1251, then to ISO-8859-1.
+  // https://github.com/google/ExoPlayer/issues/6753
+  @Nullable
+  private String decodeToString(ByteBuffer data) {
+    try {
+      return utf8Decoder.decode(data).toString();
+    } catch (CharacterCodingException e) {
+      // Fall through to try CP-1251 decoding.
+    } finally {
+      utf8Decoder.reset();
+      data.rewind();
+    }
+    try {
+      return cp1251Decoder.decode(data).toString();
+    } catch (CharacterCodingException e) {
+      // Fall through to try ISO-8859-1 decoding.
+    } finally {
+      cp1251Decoder.reset();
+      data.rewind();
+    }
+    try {
+      return iso88591Decoder.decode(data).toString();
+    } catch (CharacterCodingException e) {
+      return null;
+    } finally {
+      iso88591Decoder.reset();
+      data.rewind();
+    }
   }
 }

@@ -101,6 +101,16 @@ public final class C {
   public static final String UTF8_NAME = "UTF-8";
 
   /**
+   * The name of the CP-1251 charset.
+   */
+  public static final String CP_1251_NAME = "CP-1251";
+
+  /**
+   * The name of the ISO-8859-1 charset.
+   */
+  public static final String ISO88591_NAME = "ISO-8859-1";
+
+  /**
    * The name of the UTF-16 charset.
    */
   public static final String UTF16_NAME = "UTF-16";
@@ -156,22 +166,22 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    Format.NO_VALUE,
-    ENCODING_INVALID,
-    ENCODING_PCM_8BIT,
-    ENCODING_PCM_16BIT,
-    ENCODING_PCM_24BIT,
-    ENCODING_PCM_32BIT,
-    ENCODING_PCM_FLOAT,
-    ENCODING_PCM_MU_LAW,
-    ENCODING_PCM_A_LAW,
-    ENCODING_AC3,
-    ENCODING_E_AC3,
-    ENCODING_E_AC3_JOC,
-    ENCODING_AC4,
-    ENCODING_DTS,
-    ENCODING_DTS_HD,
-    ENCODING_DOLBY_TRUEHD,
+      Format.NO_VALUE,
+      ENCODING_INVALID,
+      ENCODING_PCM_8BIT,
+      ENCODING_PCM_16BIT,
+      ENCODING_PCM_24BIT,
+      ENCODING_PCM_32BIT,
+      ENCODING_PCM_FLOAT,
+      ENCODING_PCM_MU_LAW,
+      ENCODING_PCM_A_LAW,
+      ENCODING_AC3,
+      ENCODING_E_AC3,
+      ENCODING_E_AC3_JOC,
+      ENCODING_AC4,
+      ENCODING_DTS,
+      ENCODING_DTS_HD,
+      ENCODING_DOLBY_TRUEHD,
   })
   public @interface Encoding {}
 
@@ -184,15 +194,15 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    Format.NO_VALUE,
-    ENCODING_INVALID,
-    ENCODING_PCM_8BIT,
-    ENCODING_PCM_16BIT,
-    ENCODING_PCM_24BIT,
-    ENCODING_PCM_32BIT,
-    ENCODING_PCM_FLOAT,
-    ENCODING_PCM_MU_LAW,
-    ENCODING_PCM_A_LAW
+      Format.NO_VALUE,
+      ENCODING_INVALID,
+      ENCODING_PCM_8BIT,
+      ENCODING_PCM_16BIT,
+      ENCODING_PCM_24BIT,
+      ENCODING_PCM_32BIT,
+      ENCODING_PCM_FLOAT,
+      ENCODING_PCM_MU_LAW,
+      ENCODING_PCM_A_LAW
   })
   public @interface PcmEncoding {}
   /** @see AudioFormat#ENCODING_INVALID */
@@ -235,14 +245,14 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    STREAM_TYPE_ALARM,
-    STREAM_TYPE_DTMF,
-    STREAM_TYPE_MUSIC,
-    STREAM_TYPE_NOTIFICATION,
-    STREAM_TYPE_RING,
-    STREAM_TYPE_SYSTEM,
-    STREAM_TYPE_VOICE_CALL,
-    STREAM_TYPE_USE_DEFAULT
+      STREAM_TYPE_ALARM,
+      STREAM_TYPE_DTMF,
+      STREAM_TYPE_MUSIC,
+      STREAM_TYPE_NOTIFICATION,
+      STREAM_TYPE_RING,
+      STREAM_TYPE_SYSTEM,
+      STREAM_TYPE_VOICE_CALL,
+      STREAM_TYPE_USE_DEFAULT
   })
   public @interface StreamType {}
   /**
@@ -290,11 +300,11 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    CONTENT_TYPE_MOVIE,
-    CONTENT_TYPE_MUSIC,
-    CONTENT_TYPE_SONIFICATION,
-    CONTENT_TYPE_SPEECH,
-    CONTENT_TYPE_UNKNOWN
+      CONTENT_TYPE_MOVIE,
+      CONTENT_TYPE_MUSIC,
+      CONTENT_TYPE_SONIFICATION,
+      CONTENT_TYPE_SPEECH,
+      CONTENT_TYPE_UNKNOWN
   })
   public @interface AudioContentType {}
   /**
@@ -354,22 +364,22 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    USAGE_ALARM,
-    USAGE_ASSISTANCE_ACCESSIBILITY,
-    USAGE_ASSISTANCE_NAVIGATION_GUIDANCE,
-    USAGE_ASSISTANCE_SONIFICATION,
-    USAGE_ASSISTANT,
-    USAGE_GAME,
-    USAGE_MEDIA,
-    USAGE_NOTIFICATION,
-    USAGE_NOTIFICATION_COMMUNICATION_DELAYED,
-    USAGE_NOTIFICATION_COMMUNICATION_INSTANT,
-    USAGE_NOTIFICATION_COMMUNICATION_REQUEST,
-    USAGE_NOTIFICATION_EVENT,
-    USAGE_NOTIFICATION_RINGTONE,
-    USAGE_UNKNOWN,
-    USAGE_VOICE_COMMUNICATION,
-    USAGE_VOICE_COMMUNICATION_SIGNALLING
+      USAGE_ALARM,
+      USAGE_ASSISTANCE_ACCESSIBILITY,
+      USAGE_ASSISTANCE_NAVIGATION_GUIDANCE,
+      USAGE_ASSISTANCE_SONIFICATION,
+      USAGE_ASSISTANT,
+      USAGE_GAME,
+      USAGE_MEDIA,
+      USAGE_NOTIFICATION,
+      USAGE_NOTIFICATION_COMMUNICATION_DELAYED,
+      USAGE_NOTIFICATION_COMMUNICATION_INSTANT,
+      USAGE_NOTIFICATION_COMMUNICATION_REQUEST,
+      USAGE_NOTIFICATION_EVENT,
+      USAGE_NOTIFICATION_RINGTONE,
+      USAGE_UNKNOWN,
+      USAGE_VOICE_COMMUNICATION,
+      USAGE_VOICE_COMMUNICATION_SIGNALLING
   })
   public @interface AudioUsage {}
   /**
@@ -466,11 +476,11 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    AUDIOFOCUS_NONE,
-    AUDIOFOCUS_GAIN,
-    AUDIOFOCUS_GAIN_TRANSIENT,
-    AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK,
-    AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE
+      AUDIOFOCUS_NONE,
+      AUDIOFOCUS_GAIN,
+      AUDIOFOCUS_GAIN_TRANSIENT,
+      AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK,
+      AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE
   })
   public @interface AudioFocusGain {}
   /** @see AudioManager#AUDIOFOCUS_NONE */
@@ -496,12 +506,12 @@ public final class C {
   @IntDef(
       flag = true,
       value = {
-        BUFFER_FLAG_KEY_FRAME,
-        BUFFER_FLAG_END_OF_STREAM,
-        BUFFER_FLAG_HAS_SUPPLEMENTAL_DATA,
-        BUFFER_FLAG_LAST_SAMPLE,
-        BUFFER_FLAG_ENCRYPTED,
-        BUFFER_FLAG_DECODE_ONLY
+          BUFFER_FLAG_KEY_FRAME,
+          BUFFER_FLAG_END_OF_STREAM,
+          BUFFER_FLAG_HAS_SUPPLEMENTAL_DATA,
+          BUFFER_FLAG_LAST_SAMPLE,
+          BUFFER_FLAG_ENCRYPTED,
+          BUFFER_FLAG_DECODE_ONLY
       })
   public @interface BufferFlags {}
   /**
@@ -855,11 +865,11 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    Format.NO_VALUE,
-    STEREO_MODE_MONO,
-    STEREO_MODE_TOP_BOTTOM,
-    STEREO_MODE_LEFT_RIGHT,
-    STEREO_MODE_STEREO_MESH
+      Format.NO_VALUE,
+      STEREO_MODE_MONO,
+      STEREO_MODE_TOP_BOTTOM,
+      STEREO_MODE_LEFT_RIGHT,
+      STEREO_MODE_STEREO_MESH
   })
   public @interface StereoMode {}
   /**
@@ -943,11 +953,11 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    Format.NO_VALUE,
-    PROJECTION_RECTANGULAR,
-    PROJECTION_EQUIRECTANGULAR,
-    PROJECTION_CUBEMAP,
-    PROJECTION_MESH
+      Format.NO_VALUE,
+      PROJECTION_RECTANGULAR,
+      PROJECTION_EQUIRECTANGULAR,
+      PROJECTION_CUBEMAP,
+      PROJECTION_MESH
   })
   public @interface Projection {}
   /** Conventional rectangular projection. */
@@ -982,15 +992,15 @@ public final class C {
   @Documented
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    NETWORK_TYPE_UNKNOWN,
-    NETWORK_TYPE_OFFLINE,
-    NETWORK_TYPE_WIFI,
-    NETWORK_TYPE_2G,
-    NETWORK_TYPE_3G,
-    NETWORK_TYPE_4G,
-    NETWORK_TYPE_CELLULAR_UNKNOWN,
-    NETWORK_TYPE_ETHERNET,
-    NETWORK_TYPE_OTHER
+      NETWORK_TYPE_UNKNOWN,
+      NETWORK_TYPE_OFFLINE,
+      NETWORK_TYPE_WIFI,
+      NETWORK_TYPE_2G,
+      NETWORK_TYPE_3G,
+      NETWORK_TYPE_4G,
+      NETWORK_TYPE_CELLULAR_UNKNOWN,
+      NETWORK_TYPE_ETHERNET,
+      NETWORK_TYPE_OTHER
   })
   public @interface NetworkType {}
   /** Unknown network type. */
@@ -1031,20 +1041,20 @@ public final class C {
   @IntDef(
       flag = true,
       value = {
-        ROLE_FLAG_MAIN,
-        ROLE_FLAG_ALTERNATE,
-        ROLE_FLAG_SUPPLEMENTARY,
-        ROLE_FLAG_COMMENTARY,
-        ROLE_FLAG_DUB,
-        ROLE_FLAG_EMERGENCY,
-        ROLE_FLAG_CAPTION,
-        ROLE_FLAG_SUBTITLE,
-        ROLE_FLAG_SIGN,
-        ROLE_FLAG_DESCRIBES_VIDEO,
-        ROLE_FLAG_DESCRIBES_MUSIC_AND_SOUND,
-        ROLE_FLAG_ENHANCED_DIALOG_INTELLIGIBILITY,
-        ROLE_FLAG_TRANSCRIBES_DIALOG,
-        ROLE_FLAG_EASY_TO_READ
+          ROLE_FLAG_MAIN,
+          ROLE_FLAG_ALTERNATE,
+          ROLE_FLAG_SUPPLEMENTARY,
+          ROLE_FLAG_COMMENTARY,
+          ROLE_FLAG_DUB,
+          ROLE_FLAG_EMERGENCY,
+          ROLE_FLAG_CAPTION,
+          ROLE_FLAG_SUBTITLE,
+          ROLE_FLAG_SIGN,
+          ROLE_FLAG_DESCRIBES_VIDEO,
+          ROLE_FLAG_DESCRIBES_MUSIC_AND_SOUND,
+          ROLE_FLAG_ENHANCED_DIALOG_INTELLIGIBILITY,
+          ROLE_FLAG_TRANSCRIBES_DIALOG,
+          ROLE_FLAG_EASY_TO_READ
       })
   public @interface RoleFlags {}
   /** Indicates a main track. */
